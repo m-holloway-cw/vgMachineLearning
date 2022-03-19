@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Login to Video Game Data Exploration Dashboard</title>
+  </head>
+  <body>
+
+  <form action='/vgLogin' method='post' id="loginForm">
+    <label>
+      Username
+    <input type="text" name="username" value="" required="" style="border-radius: 15px;height: 30; border: 2px solid white;text-align: center;">
+    </label>
+    <label>
+      Password
+    <input type="text" name="password" value="" required="" style="border-radius: 15px;height: 30; border: 2px solid white;text-align: center;">
+    </label>
+<input type="submit" value="Login" style="height: 50px; font-size: 18px;">
+  </form>
+
+  <div id="status"></div>
+</body>
+<style>
+  body {
+    color: white;
+  background-color: #303A41;
+  }
+</style>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+//$('#loginForm').submit(function(){
+  //postLogin();
+//});
+
+function postLogin(){
+  $.ajax({
+    url: '/vgLogin',
+    type: 'post',
+    data: $('#loginForm').serialize(),
+    success:function(data){
+      console.log(data)
+      if(data){
+        window.location.replace='https://raxa.dev/vgsales';
+      } else {
+        document.getElementById('status').innerHTML =  'Login Failed';
+      }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //alert("Error occurred in request");
+      }
+  });
+};
+</script>
+  </html>

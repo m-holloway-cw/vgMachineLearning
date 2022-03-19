@@ -1,0 +1,161 @@
+<html>
+<head>
+  <base href="/"/>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src='https://cdn.plot.ly/plotly-2.8.3.min.js'></script>
+  <script src='/vgJS'></script>
+</head>
+
+<body>
+<div id="title">
+  <h1>
+  Video Game Data Exploration Dashboard
+  <h1>
+</div>
+<div class="userInfo">Logged in as:
+    <p id="username"></p>
+</div>
+<h3 style="text-align:center">Click on a tab below to begin</h3>
+<div class="tab">
+  <button class="tabButton" onclick="openGenreSales(event)">Genre Sales</button>
+  <button class="tabButton" onclick="openGenreData(event)">Genre Data</button>
+  <button class="tabButton" onclick="openPrediction(event)">Prediction</button>
+</div>
+
+<div id="genreSales" class="tabContent">
+</div>
+
+<div id="genreData" class="tabContent">
+  <div><h1>Breakdown of genre distribution</h1>
+  <h3>Various pie charts and bar chart to organize the most commonly occuring types.</h3>
+    <br><br>
+  <label for="quantity">Query number between 1 and 15000:</label>
+  <input type="number" id="quantity" name="quantity" min="1" max= "15000" value="50">
+  <button onclick='generateData()'>Change query size</button>
+  <div id="genreCountPie"></div>
+  <div id="genrePlatCountPie"></div>
+  <div id="genrePlatBar"></div>
+</div>
+</div>
+
+<div id="prediction" class="tabContent">
+  <label for="genre">Choose a genre:</label>
+  <select id='predGenre'>
+    <option value='Sports'>Sports</option>
+    <option value='Platform'>Platform</option>
+    <option value='Racing'>Racing</option>
+    <option value='Role-Playing'>Role-Playing</option>
+    <option value='Puzzle'>Puzzle</option>
+    <option value='Misc'>Misc</option>
+    <option value='Shooter'>Shooter</option>
+    <option value='Simulation'>Simulation</option>
+    <option value='Action'>Action</option>
+    <option value='Fighting'>Fighting</option>
+    <option value='Adventure'>Adventure</option>
+    <option value='Strategy'>Strategy</option>
+  </select>
+
+
+
+  <label for="platform">Choose a platform:</label>
+  <select id='predPlatform'>
+    <option value='Wii'>Wii</option>
+
+    <option value='NES'>NES</option>
+    <option value='SNES'>Super Nintendo</option>
+    <option value='GB'>Game Boy</option>
+    <option value='GBA'>Game Boy Advance</option>
+    <option value='DS'>DS</option>
+    <option value='3DS'>3DS</option>
+    <option value='N64'>Nintendo64</option>
+    <option value='GC'>GameCube</option>
+
+    <option value='PS'>Playstation 1</option>
+    <option value='PS2'>Playstation 2</option>
+    <option value='PS3'>Playstation 3</option>
+    <option value='PS4'>Playstation 4</option>
+
+    <option value='PC'>PC</option>
+
+    <option value='XB'>Xbox</option>
+    <option value='X360'>Xbox360</option>
+    <option value='XOne'>Xbox One</option>
+  </select>
+  <label for="year">Choose a year:</label>
+  <select id='predYear'>
+    <option value='2021'>2021</option>
+    <option value='2022'>2022</option>
+    <option value='2023'>2023</option>
+    <option value='2024'>2024</option>
+    <option value='2025'>2025</option>
+  </select>
+  <button onclick='runPred()'>Run Predictor</button>
+  <hr>
+  <div id='predictionResult'>
+  Estimated predicted sales:
+<br><br>
+Average past sales for combination:</div>
+  <hr>
+  <div>*Estimations are based on past sales and do not take into account deprecated consoles.*<br> *Totals are for global sales assuming it is released in all regions.*
+</div>
+
+
+<style>
+.userInfo {
+  display:block;
+  position: absolute;
+  text-align: right;
+  top: 10;
+  right: 10;
+}
+
+.tab {
+ overflow: hidden;
+ border: 1px solid #ccc;
+ background-color: #f1f1f1;
+}
+
+.tab button {
+ background-color: inherit;
+ float: left;
+ border: none;
+ outline: none;
+ cursor: pointer;
+ padding: 14px 16px;
+ transition: 0.3s;
+ width: 200px;
+}
+
+.tab button:hover {
+ background-color: #ddd;
+}
+
+.tab button.active {
+ background-color: #ccc;
+}
+
+.tabcontent {
+ display: none;
+ padding: 6px 12px;
+ border: 1px solid #ccc;
+ border-top: none;
+ text-align: center;
+}
+
+
+#genreSales > span {
+  width: 600px;
+  display: inline-block;
+}
+
+</style>
+<script>
+//fill username and profile pic
+  var user = "<%= user %>";
+  console.log(user);
+  document.getElementById("username").innerHTML = user;
+
+</script>
+</body>
+</html>
